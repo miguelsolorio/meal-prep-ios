@@ -106,7 +106,7 @@ struct ShoppingListView: View {
     @ViewBuilder
     private var flatSections: some View {
         if !toBuyItems.isEmpty {
-            Section("To Buy (\(toBuyItems.count))") {
+            Section {
                 ForEach(toBuyItems) { item in
                     ShoppingListRowView(
                         item: item,
