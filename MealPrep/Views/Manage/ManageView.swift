@@ -20,18 +20,43 @@ struct ManageView: View {
                 } else {
                     List {
                         ForEach(selectedRecipes) { recipe in
-                            NavigationLink {
-                                RecipeDetailView(recipe: recipe)
-                            } label: {
-                                recipeRow(recipe)
-                            }
-                            .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
+                            HStack(spacing: 12) {
+                                RecipeImageView(url: recipe.imageURL, cornerRadius: 8)
+                                    .frame(width: 56, height: 56)
+                                    .clipped()
+
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(recipe.name)
+                                        .font(.headline)
+                                        .lineLimit(2)
+
+                                    HStack(spacing: 8) {
+                                        if !recipe.displayDuration.isEmpty {
+                                            Label(recipe.displayDuration, systemImage: "clock")
+                                                .font(.caption)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                        if !recipe.author.isEmpty {
+                                            Text("· \(recipe.author)")
+                                                .font(.caption)
+                                                .foregroundStyle(.secondary)
+                                                .lineLimit(1)
+                                        }
+                                    }
+                                }
+
+                                Spacer(minLength: 0)
+
+                                Button {
                                     store.removeFromShoppingList(recipe.id)
                                 } label: {
-                                    Label("Remove", systemImage: "minus.circle")
+                                    Image(systemName: "minus.circle.fill")
+                                        .font(.system(size: 22))
+                                        .foregroundStyle(.red)
                                 }
+                                .buttonStyle(.plain)
                             }
+                            .padding(.vertical, 4)
                         }
                     }
                 }
@@ -50,34 +75,5 @@ struct ManageView: View {
                 ImportView()
             }
         }
-    }
-
-    private func recipeRow(_ recipe: Recipe) -> some View {
-        HStack(spacing: 12) {
-            RecipeImageView(url: recipe.imageURL, cornerRadius: 8)
-                .frame(width: 56, height: 56)
-                .clipped()
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(recipe.name)
-                    .font(.headline)
-                    .lineLimit(2)
-
-                HStack(spacing: 8) {
-                    if !recipe.displayDuration.isEmpty {
-                        Label(recipe.displayDuration, systemImage: "clock")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                    if !recipe.author.isEmpty {
-                        Text("· \(recipe.author)")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                    }
-                }
-            }
-        }
-        .padding(.vertical, 4)
     }
 }

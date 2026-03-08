@@ -40,10 +40,12 @@ struct PlanningView: View {
     private func daySection(title: String, day: Int?, recipes: [Recipe]) -> some View {
         Section(title) {
             ForEach(recipes) { recipe in
-                PlanningRowView(recipe: recipe)
-                    .contextMenu {
-                        moveToDayMenu(for: recipe.id, currentDay: day)
-                    }
+                PlanningRowView(recipe: recipe, onRemove: day != nil ? {
+                    store.moveRecipeToDay(nil, recipeID: recipe.id)
+                } : nil)
+                .contextMenu {
+                    moveToDayMenu(for: recipe.id, currentDay: day)
+                }
             }
             .onMove { from, to in
                 if let day { store.moveInDay(day, from: from, to: to) }
@@ -69,6 +71,12 @@ struct PlanningView: View {
 
 private struct PlanningRowView: View {
     let recipe: Recipe
+    let onRemove: (() -> Void)?
+
+    init(recipe: Recipe, onRemove: (() -> Void)? = nil) {
+        self.recipe = recipe
+        self.onRemove = onRemove
+    }
 
     var body: some View {
         HStack(spacing: 12) {
@@ -87,6 +95,16 @@ private struct PlanningRowView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
+            }
+
+            if let onRemove {
+                Spacer(minLength: 0)
+                Button(action: onRemove) {
+                    Image(systemName: "minus.circle.fill")
+                        .font(.system(size: 20))
+                        .foregroundStyle(.red)
+                }
+                .buttonStyle(.plain)
             }
         }
     }
