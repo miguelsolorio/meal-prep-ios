@@ -61,7 +61,10 @@ struct LibraryView: View {
                     Button {
                         showingFilter = true
                     } label: {
-                        Image(systemName: store.filterOptions.isDefault ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+                        Image(systemName: store.filterOptions.isDefault
+                              ? "line.3.horizontal.decrease.circle"
+                              : "line.3.horizontal.decrease.circle.fill")
+                            .foregroundStyle(store.filterOptions.isDefault ? .secondary : Color.accentColor)
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
