@@ -16,7 +16,7 @@ struct SettingsView: View {
                         .textInputAutocapitalization(.never)
 
                     Button {
-                        store.nytCookie = cookieText
+                        store.recipeCookie = cookieText
                         showingSaved = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             showingSaved = false
@@ -36,13 +36,13 @@ struct SettingsView: View {
                     .listRowBackground(Color.clear)
                     .padding(.vertical, 4)
                 } header: {
-                    Text("NYT Cooking Cookie")
+                    Text("Browser Cookie")
                 } footer: {
-                    Text("Paste your full cookie string from your browser to access paywalled NYT Cooking recipes.")
+                    Text("Paste your browser cookie to access recipes on paywalled sites.")
                 }
 
                 Section("How to Get Your Cookie") {
-                    howToRow(number: "1", text: "Open NYT Cooking in Safari on your Mac.")
+                    howToRow(number: "1", text: "Open the recipe website in Safari on your Mac.")
                     howToRow(number: "2", text: "Open Safari's Develop menu → Show Web Inspector (or press ⌥⌘I).")
                     howToRow(number: "3", text: "Go to the Network tab and reload the page.")
                     howToRow(number: "4", text: "Click any request, find the Request Headers, copy the full Cookie value.")
@@ -51,7 +51,7 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .onAppear {
-                cookieText = store.nytCookie
+                cookieText = store.recipeCookie
             }
         }
     }

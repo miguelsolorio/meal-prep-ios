@@ -82,7 +82,7 @@
 		73A4223D0FC045DD71C670A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7B6F03BC52DF7A2D432F0A8C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		90A6DE5A663632B5B9CA2736 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
-		92206E3F3E7C68A3F35CD085 /* MealPrep.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MealPrep.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92206E3F3E7C68A3F35CD085 /* Meal Prep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meal Prep.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17FC90EEF22AA7CAAB3727F /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		A7ACD5407ED8C4A11776EEDD /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		A93DE4F5A0EE13C7908D87E2 /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		1B46A64A5386ABE500325884 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92206E3F3E7C68A3F35CD085 /* MealPrep.app */,
+				92206E3F3E7C68A3F35CD085 /* Meal Prep.app */,
 				CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */,
 			);
 			name = Products;
@@ -285,7 +285,7 @@
 			packageProductDependencies = (
 			);
 			productName = MealPrep;
-			productReference = 92206E3F3E7C68A3F35CD085 /* MealPrep.app */;
+			productReference = 92206E3F3E7C68A3F35CD085 /* Meal Prep.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E75E0177EF4412EAFDE3E883 /* MealPrepShareExtension */ = {
@@ -314,9 +314,6 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					3164044ADD05C7FAF0C95FCF = {
-						DevelopmentTeam = "";
-					};
 					E75E0177EF4412EAFDE3E883 = {
 						DevelopmentTeam = "";
 					};
@@ -411,7 +408,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MealPrep/MealPrep.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KYAL7ZEFQE;
 				INFOPLIST_FILE = MealPrep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -573,7 +570,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MealPrep/MealPrep.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KYAL7ZEFQE;
 				INFOPLIST_FILE = MealPrep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

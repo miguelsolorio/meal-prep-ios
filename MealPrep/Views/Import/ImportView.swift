@@ -10,7 +10,7 @@ struct ImportView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Paste a NYT Cooking recipe URL below.")
+                    Text("Paste a recipe URL below.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
 

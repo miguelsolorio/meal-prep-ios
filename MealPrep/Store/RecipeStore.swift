@@ -91,9 +91,9 @@ final class RecipeStore: ObservableObject {
 
     // MARK: - Cookie
 
-    var nytCookie: String {
-        get { UserDefaults.standard.string(forKey: UserDefaultsKeys.nytCookie) ?? "" }
-        set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.nytCookie) }
+    var recipeCookie: String {
+        get { UserDefaults.standard.string(forKey: UserDefaultsKeys.recipeCookie) ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.recipeCookie) }
     }
 
     // MARK: - Filtering
@@ -193,7 +193,7 @@ final class RecipeStore: ObservableObject {
         importError = nil
 
         do {
-            let scraped = try await scraper.scrape(url: url, cookie: nytCookie)
+            let scraped = try await scraper.scrape(url: url, cookie: recipeCookie)
             let recipe = Recipe(
                 name: scraped.name,
                 sourceURL: scraped.sourceURL,
