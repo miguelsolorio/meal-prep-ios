@@ -10,6 +10,11 @@ struct ContentView: View {
                     Label("Library", systemImage: "books.vertical")
                 }
 
+            ManageView()
+                .tabItem {
+                    Label("Manage", systemImage: "checklist")
+                }
+
             PlanningView()
                 .tabItem {
                     Label("Planning", systemImage: "calendar")

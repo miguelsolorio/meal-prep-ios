@@ -6,7 +6,6 @@ struct ShoppingListView: View {
     @State private var groupByDepartment = false
     @State private var newIngredientText = ""
     @State private var showingClearConfirmation = false
-    @State private var showingManage = false
     @FocusState private var isAddFieldFocused: Bool
 
     private var allItems: [ShoppingItem] { store.shoppingListIngredients }
@@ -62,15 +61,6 @@ struct ShoppingListView: View {
 
                         // Bottom buttons
                         VStack(spacing: 8) {
-                            Button {
-                                showingManage = true
-                            } label: {
-                                Text("Manage Recipes")
-                                    .frame(maxWidth: .infinity)
-                            }
-                            .buttonStyle(.bordered)
-                            .controlSize(.large)
-
                             Button(role: .destructive) {
                                 showingClearConfirmation = true
                             } label: {
@@ -98,9 +88,6 @@ struct ShoppingListView: View {
                         }
                     }
                 }
-            }
-            .sheet(isPresented: $showingManage) {
-                ManageRecipesView()
             }
             .alert("Clear Shopping List", isPresented: $showingClearConfirmation) {
                 Button("Clear", role: .destructive) {
