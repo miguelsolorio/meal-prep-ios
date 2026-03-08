@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ManageView: View {
     @EnvironmentObject private var store: RecipeStore
-    @State private var showingImport = false
 
     private var selectedRecipes: [Recipe] {
         store.recipes.filter { store.isSelected($0.id) }
@@ -62,18 +61,6 @@ struct ManageView: View {
                 }
             }
             .navigationTitle("Manage")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showingImport = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $showingImport) {
-                ImportView()
-            }
         }
     }
 }
