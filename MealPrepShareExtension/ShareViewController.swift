@@ -1,6 +1,12 @@
 import UIKit
 import UniformTypeIdentifiers
 
+private enum ShareConstants {
+    static let appGroup = "group.com.miguelsolorio.mealprep"
+    static let pendingImportURL = "pending_import_url"
+    static let urlScheme = "mealprep://import?url="
+}
+
 @MainActor
 final class ShareViewController: UIViewController {
 
@@ -71,37 +77,50 @@ final class ShareViewController: UIViewController {
     private func extractAndImport() {
         guard
             let item = extensionContext?.inputItems.first as? NSExtensionItem,
-            let provider = item.attachments?.first(where: {
-                $0.hasItemConformingToTypeIdentifier(UTType.url.identifier)
-            })
+            let attachments = item.attachments,
+            !attachments.isEmpty
         else {
             finish()
             return
         }
 
-        provider.loadItem(forTypeIdentifier: UTType.url.identifier) { [weak self] item, _ in
-            let url = item as? URL
-            Task { @MainActor [weak self] in
-                if let url {
-                    // Save to shared UserDefaults first so the main app can pick it up
-                    let defaults = UserDefaults(suiteName: "group.com.miguelsolorio.mealprep")
-                    defaults?.set(url.absoluteString, forKey: "pending_import_url")
-                    defaults?.synchronize()
-
-                    self?.subtitleLabel.text = "Opening Meal Prep…"
-                    self?.openMainApp(urlString: url.absoluteString)
-
-                    // Brief pause so the user sees feedback before the sheet dismisses
-                    try? await Task.sleep(for: .milliseconds(400))
-                }
-                self?.finish()
+        // Try URL type first, then fall back to plain text (Safari shares both)
+        if let provider = attachments.first(where: { $0.hasItemConformingToTypeIdentifier(UTType.url.identifier) }) {
+            provider.loadObject(ofClass: URL.self) { [weak self] url, _ in
+                self?.scheduleImport(url)
             }
+        } else if let provider = attachments.first(where: { $0.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) }) {
+            provider.loadObject(ofClass: String.self) { [weak self] text, _ in
+                let url = text.flatMap { URL(string: $0.trimmingCharacters(in: .whitespacesAndNewlines)) }
+                self?.scheduleImport(url)
+            }
+        } else {
+            finish()
         }
+    }
+
+    private func scheduleImport(_ url: URL?) {
+        Task { @MainActor [weak self] in
+            await self?.handleExtractedURL(url)
+        }
+    }
+
+    private func handleExtractedURL(_ url: URL?) async {
+        if let url {
+            UserDefaults(suiteName: ShareConstants.appGroup)?
+                .set(url.absoluteString, forKey: ShareConstants.pendingImportURL)
+
+            subtitleLabel.text = "Opening Meal Prep…"
+            openMainApp(urlString: url.absoluteString)
+
+            try? await Task.sleep(for: .milliseconds(400))
+        }
+        finish()
     }
 
     private func openMainApp(urlString: String) {
         let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        guard let appURL = URL(string: "mealprep://import?url=\(encoded)") else { return }
+        guard let appURL = URL(string: "\(ShareConstants.urlScheme)\(encoded)") else { return }
 
         var responder: UIResponder? = self
         while let r = responder {
