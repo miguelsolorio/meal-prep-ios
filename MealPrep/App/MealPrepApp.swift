@@ -8,12 +8,27 @@ struct MealPrepApp: App {
     @Environment(\.scenePhase) private var scenePhase
 
     init() {
+        let container = Self.makeContainer()
+        self.container = container
+        _store = StateObject(wrappedValue: RecipeStore(context: container.mainContext))
+    }
+
+    private static func makeContainer() -> ModelContainer {
         do {
-            let container = try ModelContainer(for: Recipe.self)
-            self.container = container
-            _store = StateObject(wrappedValue: RecipeStore(context: container.mainContext))
+            return try ModelContainer(for: Recipe.self)
         } catch {
-            fatalError("Failed to create ModelContainer: \(error)")
+            // Store is incompatible with the current schema (e.g. after a model change).
+            // Delete it and start fresh rather than crashing.
+            print("⚠️ ModelContainer load failed (\(error)). Deleting store and retrying.")
+            let storeURL = URL.applicationSupportDirectory.appending(path: "default.store")
+            for ext in ["", "-shm", "-wal"] {
+                try? FileManager.default.removeItem(at: storeURL.appendingPathExtension(ext.isEmpty ? "sqlite" : "sqlite\(ext)"))
+            }
+            do {
+                return try ModelContainer(for: Recipe.self)
+            } catch {
+                fatalError("Failed to create ModelContainer after reset: \(error)")
+            }
         }
     }
 
