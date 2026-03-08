@@ -8,51 +8,75 @@ struct ImportView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Paste a NYT Cooking recipe URL below.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+            VStack(spacing: 0) {
+                VStack(spacing: 24) {
+                    // Icon + heading
+                    VStack(spacing: 12) {
+                        Image(systemName: "fork.knife.circle.fill")
+                            .font(.system(size: 56))
+                            .foregroundStyle(Color.accentColor)
 
-                    TextField(text: $urlText, prompt: nil) { EmptyView() }
-                        .keyboardType(.URL)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .focused($isTextFieldFocused)
-                        .submitLabel(.go)
-                        .padding(12)
-                        .background(Color(.secondarySystemGroupedBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .onSubmit { importIfNeeded() }
-                }
+                        VStack(spacing: 4) {
+                            Text("Add Recipe")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            Text("Paste a NYT Cooking recipe URL")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .padding(.top, 16)
 
-                if let error = store.importError {
-                    Label(error, systemImage: "exclamationmark.triangle.fill")
-                        .font(.footnote)
+                    // URL field
+                    HStack(spacing: 10) {
+                        Image(systemName: "link")
+                            .foregroundStyle(.secondary)
+                            .frame(width: 20)
+
+                        TextField("https://cooking.nytimes.com/…", text: $urlText)
+                            .keyboardType(.URL)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .focused($isTextFieldFocused)
+                            .submitLabel(.go)
+                            .onSubmit { importIfNeeded() }
+                    }
+                    .padding(14)
+                    .background(Color(.secondarySystemGroupedBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+
+                    if let error = store.importError {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                            Text(error)
+                                .font(.footnote)
+                        }
                         .foregroundStyle(.red)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                        .padding(.horizontal, 4)
+                    }
 
-                Button(action: importIfNeeded) {
-                    if store.isImporting {
-                        HStack {
-                            ProgressView().tint(.white)
-                            Text("Importing…")
+                    Button(action: importIfNeeded) {
+                        Group {
+                            if store.isImporting {
+                                HStack(spacing: 8) {
+                                    ProgressView().tint(.white)
+                                    Text("Importing…")
+                                }
+                            } else {
+                                Text("Import Recipe")
+                            }
                         }
                         .frame(maxWidth: .infinity)
-                    } else {
-                        Text("Import Recipe")
-                            .frame(maxWidth: .infinity)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .disabled(store.isImporting || urlText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .disabled(store.isImporting || urlText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                .padding(.horizontal, 24)
 
                 Spacer()
             }
-            .padding()
-            .navigationTitle("Add Recipe")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

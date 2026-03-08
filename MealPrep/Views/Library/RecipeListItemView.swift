@@ -7,24 +7,16 @@ struct RecipeListItemView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            if !isSelected {
-                Button(action: onAdd) {
-                    Image(systemName: "plus.circle")
-                        .font(.system(size: 24))
-                        .foregroundStyle(Color.secondary)
-                }
-                .buttonStyle(.plain)
-            }
-
-            RecipeImageView(url: recipe.imageURL, cornerRadius: 8)
-                .frame(width: 64, height: 64)
+            RecipeImageView(url: recipe.imageURL, cornerRadius: 10)
+                .frame(width: 72, height: 72)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(recipe.name)
-                    .font(.headline)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
                     .lineLimit(2)
 
-                HStack(spacing: 8) {
+                HStack(spacing: 6) {
                     if !recipe.displayDuration.isEmpty {
                         Label(recipe.displayDuration, systemImage: "clock")
                             .font(.caption)
@@ -40,6 +32,15 @@ struct RecipeListItemView: View {
             }
 
             Spacer(minLength: 0)
+
+            if !isSelected {
+                Button(action: onAdd) {
+                    Image(systemName: "plus.circle")
+                        .font(.system(size: 22))
+                        .foregroundStyle(Color.accentColor)
+                }
+                .buttonStyle(.plain)
+            }
         }
         .contentShape(Rectangle())
     }

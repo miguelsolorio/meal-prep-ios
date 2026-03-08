@@ -7,32 +7,27 @@ struct RecipeDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                // Hero image
-                RecipeImageView(url: recipe.imageURL, cornerRadius: 12)
-                    .aspectRatio(16/9, contentMode: .fill)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 240)
-                    .clipped()
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
 
-                VStack(alignment: .leading, spacing: 20) {
+                // Full-bleed hero image
+                RecipeImageView(url: recipe.imageURL, cornerRadius: 0)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 260)
+                    .clipped()
+
+                VStack(alignment: .leading, spacing: 24) {
+
                     // Title & metadata
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 10) {
                         Text(recipe.name)
                             .font(.title2)
                             .fontWeight(.bold)
 
-                        HStack(spacing: 16) {
+                        HStack(spacing: 8) {
                             if !recipe.displayDuration.isEmpty {
-                                Label(recipe.displayDuration, systemImage: "clock")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
+                                metaChip(icon: "clock", text: recipe.displayDuration)
                             }
                             if !recipe.servingsText.isEmpty {
-                                Label(recipe.servingsText, systemImage: "person.2")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
+                                metaChip(icon: "person.2", text: recipe.servingsText)
                             }
                         }
 
@@ -47,15 +42,15 @@ struct RecipeDetailView: View {
 
                     // Ingredients
                     if !recipe.ingredients.isEmpty {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Ingredients")
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                        VStack(alignment: .leading, spacing: 12) {
+                            sectionHeader("Ingredients")
 
                             ForEach(recipe.ingredients, id: \.self) { ingredient in
-                                HStack(alignment: .top, spacing: 8) {
-                                    Text("•")
-                                        .foregroundStyle(.secondary)
+                                HStack(alignment: .top, spacing: 10) {
+                                    Circle()
+                                        .fill(Color.accentColor)
+                                        .frame(width: 6, height: 6)
+                                        .padding(.top, 7)
                                     Text(ingredient)
                                         .font(.body)
                                 }
@@ -68,16 +63,15 @@ struct RecipeDetailView: View {
                     // Instructions
                     if !recipe.instructions.isEmpty {
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("Instructions")
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                            sectionHeader("Instructions")
 
                             ForEach(Array(recipe.instructions.enumerated()), id: \.offset) { index, step in
-                                HStack(alignment: .top, spacing: 12) {
+                                HStack(alignment: .top, spacing: 14) {
                                     Text("\(index + 1)")
-                                        .font(.headline)
+                                        .font(.footnote)
+                                        .fontWeight(.bold)
                                         .foregroundStyle(.white)
-                                        .frame(width: 28, height: 28)
+                                        .frame(width: 26, height: 26)
                                         .background(Color.accentColor)
                                         .clipShape(Circle())
 
@@ -92,17 +86,20 @@ struct RecipeDetailView: View {
                     // Open in Safari
                     Link(destination: recipe.sourceURL) {
                         Label("Open in Safari", systemImage: "safari")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .padding(.vertical, 14)
                             .background(Color(.secondarySystemGroupedBackground))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
                     }
+                    .padding(.top, 4)
                 }
-                .padding(.horizontal, 60)
-                .padding(.vertical, 20)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 24)
             }
         }
-        .navigationTitle(recipe.name)
+        .ignoresSafeArea(edges: .top)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -116,5 +113,23 @@ struct RecipeDetailView: View {
                 }
             }
         }
+    }
+
+    private func metaChip(icon: String, text: String) -> some View {
+        Label(text, systemImage: icon)
+            .font(.caption)
+            .fontWeight(.medium)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(Color.accentColor.opacity(0.1))
+            .foregroundStyle(Color.accentColor)
+            .clipShape(Capsule())
+    }
+
+    @ViewBuilder
+    private func sectionHeader(_ title: String) -> some View {
+        Text(title)
+            .font(.title3)
+            .fontWeight(.bold)
     }
 }
