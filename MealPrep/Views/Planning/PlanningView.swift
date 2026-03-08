@@ -5,59 +5,81 @@ private let dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 struct PlanningView: View {
     @EnvironmentObject private var store: RecipeStore
 
-    private var selectedRecipes: [Recipe] {
-        store.recipes.filter { store.selectedRecipeIDs.contains($0.id) }
-    }
-
-    private var unassigned: [Recipe] {
-        selectedRecipes.filter { store.mealPlan[$0.id] == nil }
-    }
-
-    private func recipesForDay(_ day: Int) -> [Recipe] {
-        selectedRecipes.filter { store.mealPlan[$0.id] == day }
-    }
-
     var body: some View {
         NavigationStack {
             Group {
-                if selectedRecipes.isEmpty {
+                if store.selectedRecipeIDs.isEmpty {
                     EmptyStateView(
                         systemImage: "calendar",
                         title: "No Recipes Selected",
                         subtitle: "Add recipes to your shopping list to start planning your week."
                     )
                 } else {
-                    List {
-                        if !unassigned.isEmpty {
-                            Section("Unassigned") {
-                                ForEach(unassigned) { recipe in
-                                    PlanningRowView(recipe: recipe, dayLabel: "Assign day")
-                                }
-                            }
-                        }
-
-                        ForEach(0..<7, id: \.self) { day in
-                            let recipes = recipesForDay(day)
-                            if !recipes.isEmpty {
-                                Section(dayNames[day]) {
-                                    ForEach(recipes) { recipe in
-                                        PlanningRowView(recipe: recipe, dayLabel: dayNames[day])
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    planList
                 }
             }
             .navigationTitle("Planning")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    EditButton()
+                }
+            }
+        }
+    }
+
+    private var planList: some View {
+        List {
+            // Unassigned section — always show if there are unassigned recipes
+            let unassigned = store.unassignedPlanRecipes
+            if !unassigned.isEmpty {
+                daySection(title: "Unassigned", day: nil, recipes: unassigned)
+            }
+
+            ForEach(0..<7, id: \.self) { day in
+                daySection(title: dayNames[day], day: day, recipes: store.recipesForDay(day))
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func daySection(title: String, day: Int?, recipes: [Recipe]) -> some View {
+        Section {
+            ForEach(recipes) { recipe in
+                PlanningRowView(recipe: recipe)
+                    .draggable(recipe.id.uuidString)
+                    .swipeActions(edge: .trailing) {
+                        if day != nil {
+                            Button(role: .destructive) {
+                                store.moveRecipeToDay(nil, recipeID: recipe.id)
+                            } label: {
+                                Label("Unassign", systemImage: "xmark")
+                            }
+                        }
+                    }
+            }
+            .onMove { from, to in
+                if let day { store.moveInDay(day, from: from, to: to) }
+            }
+        } header: {
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(.primary)
+                .padding(.vertical, 4)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .dropDestination(for: String.self) { items, _ in
+                    for uuidString in items {
+                        guard let id = UUID(uuidString: uuidString) else { continue }
+                        store.moveRecipeToDay(day, recipeID: id)
+                    }
+                    return true
+                }
         }
     }
 }
 
 private struct PlanningRowView: View {
-    @EnvironmentObject private var store: RecipeStore
     let recipe: Recipe
-    let dayLabel: String
 
     var body: some View {
         HStack(spacing: 12) {
@@ -77,41 +99,6 @@ private struct PlanningRowView: View {
                         .foregroundStyle(.secondary)
                 }
             }
-
-            Spacer()
-
-            Menu {
-                ForEach(0..<7, id: \.self) { day in
-                    Button {
-                        store.assignDay(day, to: recipe.id)
-                    } label: {
-                        if store.mealPlan[recipe.id] == day {
-                            Label(dayNames[day], systemImage: "checkmark")
-                        } else {
-                            Text(dayNames[day])
-                        }
-                    }
-                }
-
-                if store.mealPlan[recipe.id] != nil {
-                    Divider()
-                    Button(role: .destructive) {
-                        store.assignDay(nil, to: recipe.id)
-                    } label: {
-                        Label("Unassign", systemImage: "xmark")
-                    }
-                }
-            } label: {
-                HStack(spacing: 4) {
-                    Text(dayLabel)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Image(systemName: "chevron.up.chevron.down")
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                }
-            }
         }
-        .contentShape(Rectangle())
     }
 }
