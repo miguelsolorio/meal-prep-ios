@@ -29,7 +29,7 @@ final class RecipeStore: ObservableObject {
     @Published var isImporting = false
     @Published var importError: String?
     @Published var shareImportError: String?
-    @Published var mealPlan: [Int: [UUID]] = [:]
+    @Published var mealPlan: [UUID: Int] = [:]  // recipeID → day index (0=Mon…6=Sun)
     @Published var searchText = ""
     @Published var filterOptions = FilterOptions()
 
@@ -76,15 +76,14 @@ final class RecipeStore: ObservableObject {
 
     private func loadMealPlan() {
         guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.mealPlan),
-              let decoded = try? JSONDecoder().decode([String: [String]].self, from: data) else { return }
-        mealPlan = Dictionary(uniqueKeysWithValues: decoded.compactMap { key, values in
-            guard let day = Int(key) else { return nil }
-            return (day, values.compactMap(UUID.init))
+              let decoded = try? JSONDecoder().decode([String: Int].self, from: data) else { return }
+        mealPlan = Dictionary(uniqueKeysWithValues: decoded.compactMap { key, day in
+            UUID(uuidString: key).map { ($0, day) }
         })
     }
 
     private func saveMealPlan() {
-        let stringKeyed = Dictionary(uniqueKeysWithValues: mealPlan.map { ($0.key.description, $0.value.map(\.uuidString)) })
+        let stringKeyed = Dictionary(uniqueKeysWithValues: mealPlan.map { ($0.key.uuidString, $0.value) })
         guard let data = try? JSONEncoder().encode(stringKeyed) else { return }
         UserDefaults.standard.set(data, forKey: UserDefaultsKeys.mealPlan)
     }
@@ -174,7 +173,9 @@ final class RecipeStore: ObservableObject {
 
     func clearShoppingList() {
         selectedRecipeIDs.removeAll()
+        mealPlan.removeAll()
         saveSelectedIDs()
+        saveMealPlan()
         customIngredients.removeAll()
         saveCustomIngredients()
     }
@@ -217,30 +218,16 @@ final class RecipeStore: ObservableObject {
 
     // MARK: - Meal Plan
 
-    func recipesForDay(_ day: Int) -> [(index: Int, recipe: Recipe)] {
-        (mealPlan[day] ?? []).enumerated().compactMap { index, id in
-            recipes.first { $0.id == id }.map { (index, $0) }
-        }
-    }
-
-    func addToDay(_ day: Int, recipeID: UUID) {
-        mealPlan[day, default: []].append(recipeID)
-        saveMealPlan()
-    }
-
-    func removeFromDay(_ day: Int, at offsets: IndexSet) {
-        mealPlan[day]?.remove(atOffsets: offsets)
-        saveMealPlan()
-    }
-
-    func moveInDay(_ day: Int, from: IndexSet, to: Int) {
-        mealPlan[day]?.move(fromOffsets: from, toOffset: to)
+    func assignDay(_ day: Int?, to recipeID: UUID) {
+        if let day { mealPlan[recipeID] = day } else { mealPlan.removeValue(forKey: recipeID) }
         saveMealPlan()
     }
 
     func deleteRecipe(_ recipe: Recipe) {
         selectedRecipeIDs.remove(recipe.id)
+        mealPlan.removeValue(forKey: recipe.id)
         saveSelectedIDs()
+        saveMealPlan()
         context.delete(recipe)
         try? context.save()
         loadRecipes()
@@ -253,7 +240,9 @@ final class RecipeStore: ObservableObject {
 
     func removeFromShoppingList(_ id: UUID) {
         selectedRecipeIDs.remove(id)
+        mealPlan.removeValue(forKey: id)
         saveSelectedIDs()
+        saveMealPlan()
     }
 
     func isSelected(_ id: UUID) -> Bool {

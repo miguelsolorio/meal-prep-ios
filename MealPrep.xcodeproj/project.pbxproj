@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		107DCF385DBC439BDD17B722 /* DayRecipePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4430E3F494A6FEF72B45ED /* DayRecipePickerView.swift */; };
 		110F88EDB0232DD08E67F892 /* RecipeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88B3D8041735123E6EA8715 /* RecipeStore.swift */; };
 		1BAC96F393D8A947988B56E8 /* ShoppingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF807432BF62D149A1BE00C2 /* ShoppingListView.swift */; };
 		1E509B1240AEF2A20E39C0D4 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FC90EEF22AA7CAAB3727F /* ImportView.swift */; };
@@ -81,20 +80,19 @@
 		73A4223D0FC045DD71C670A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7B6F03BC52DF7A2D432F0A8C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		90A6DE5A663632B5B9CA2736 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
-		92206E3F3E7C68A3F35CD085 /* MealPrep.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; name = MealPrep.app; path = "Meal Prep.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		92206E3F3E7C68A3F35CD085 /* MealPrep.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MealPrep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17FC90EEF22AA7CAAB3727F /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		A7ACD5407ED8C4A11776EEDD /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		A93DE4F5A0EE13C7908D87E2 /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		B6D0710BDB935FA818DA971F /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		BC98DA7C17D841F869F95E6A /* ManageRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRecipesView.swift; sourceTree = "<group>"; };
-		CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MealPrepShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MealPrepShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF807432BF62D149A1BE00C2 /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
 		DAA510355C95DE7274A54384 /* ShoppingListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListRowView.swift; sourceTree = "<group>"; };
 		E5974EA3C83FAA3B425F8A00 /* RecipeGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeGridItemView.swift; sourceTree = "<group>"; };
 		E88B3D8041735123E6EA8715 /* RecipeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStore.swift; sourceTree = "<group>"; };
 		EE42581385481645A0CECD82 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		F1DF922016D2207F1541DEC1 /* MealPrep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MealPrep.entitlements; sourceTree = "<group>"; };
-		FC4430E3F494A6FEF72B45ED /* DayRecipePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRecipePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -110,7 +108,6 @@
 		1D1F5F63CFC584F605360E1A /* Planning */ = {
 			isa = PBXGroup;
 			children = (
-				FC4430E3F494A6FEF72B45ED /* DayRecipePickerView.swift */,
 				5EBE4A120198A80AEA5E6A5F /* PlanningView.swift */,
 			);
 			path = Planning;
@@ -309,6 +306,9 @@
 					3164044ADD05C7FAF0C95FCF = {
 						DevelopmentTeam = "";
 					};
+					E75E0177EF4412EAFDE3E883 = {
+						DevelopmentTeam = "";
+					};
 				};
 			};
 			buildConfigurationList = 5B282779A89D32EC0F5502FA /* Build configuration list for PBXProject "MealPrep" */;
@@ -357,7 +357,6 @@
 			files = (
 				ABC770E5233EEBAAC96D73FB /* CheckboxToggleStyle.swift in Sources */,
 				541D3A15184EE2847C8B0689 /* ContentView.swift in Sources */,
-				107DCF385DBC439BDD17B722 /* DayRecipePickerView.swift in Sources */,
 				A35C54D69E2AA6547C0C2618 /* EmptyStateView.swift in Sources */,
 				7379E8A3EEBFE8DFC19EF06D /* FilterSortView.swift in Sources */,
 				E5E5D15B6ED5E808D0BC8C07 /* GroceryDepartment.swift in Sources */,
@@ -418,7 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = MealPrepShareExtension/MealPrepShareExtension.entitlements;
-				DEVELOPMENT_TEAM = KYAL7ZEFQE;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MealPrepShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -580,7 +579,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = MealPrepShareExtension/MealPrepShareExtension.entitlements;
-				DEVELOPMENT_TEAM = KYAL7ZEFQE;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MealPrepShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

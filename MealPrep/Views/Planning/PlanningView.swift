@@ -1,65 +1,63 @@
 import SwiftUI
 
+private let dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
 struct PlanningView: View {
     @EnvironmentObject private var store: RecipeStore
-    @State private var pickingForDay: Int? = nil
 
-    private let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    private var selectedRecipes: [Recipe] {
+        store.recipes.filter { store.selectedRecipeIDs.contains($0.id) }
+    }
+
+    private var unassigned: [Recipe] {
+        selectedRecipes.filter { store.mealPlan[$0.id] == nil }
+    }
+
+    private func recipesForDay(_ day: Int) -> [Recipe] {
+        selectedRecipes.filter { store.mealPlan[$0.id] == day }
+    }
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(0..<7, id: \.self) { day in
-                    daySection(day)
+            Group {
+                if selectedRecipes.isEmpty {
+                    EmptyStateView(
+                        systemImage: "calendar",
+                        title: "No Recipes Selected",
+                        subtitle: "Add recipes to your shopping list to start planning your week."
+                    )
+                } else {
+                    List {
+                        if !unassigned.isEmpty {
+                            Section("Unassigned") {
+                                ForEach(unassigned) { recipe in
+                                    PlanningRowView(recipe: recipe, dayLabel: "Assign day")
+                                }
+                            }
+                        }
+
+                        ForEach(0..<7, id: \.self) { day in
+                            let recipes = recipesForDay(day)
+                            if !recipes.isEmpty {
+                                Section(dayNames[day]) {
+                                    ForEach(recipes) { recipe in
+                                        PlanningRowView(recipe: recipe, dayLabel: dayNames[day])
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .navigationTitle("Planning")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    EditButton()
-                }
-            }
-            .sheet(isPresented: Binding(
-                get: { pickingForDay != nil },
-                set: { if !$0 { pickingForDay = nil } }
-            )) {
-                if let day = pickingForDay {
-                    DayRecipePickerView(day: day, dayName: days[day])
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func daySection(_ day: Int) -> some View {
-        Section(days[day]) {
-            let slots = store.recipesForDay(day)
-
-            if slots.isEmpty {
-                Text("No recipes planned")
-                    .font(.subheadline)
-                    .foregroundStyle(.tertiary)
-            } else {
-                ForEach(slots, id: \.index) { slot in
-                    PlanningRowView(recipe: slot.recipe)
-                }
-                .onMove { store.moveInDay(day, from: $0, to: $1) }
-                .onDelete { store.removeFromDay(day, at: $0) }
-            }
-
-            Button {
-                pickingForDay = day
-            } label: {
-                Label("Add Recipe", systemImage: "plus")
-                    .font(.subheadline)
-                    .foregroundStyle(Color.accentColor)
-            }
         }
     }
 }
 
 private struct PlanningRowView: View {
+    @EnvironmentObject private var store: RecipeStore
     let recipe: Recipe
+    let dayLabel: String
 
     var body: some View {
         HStack(spacing: 12) {
@@ -79,6 +77,41 @@ private struct PlanningRowView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+
+            Spacer()
+
+            Menu {
+                ForEach(0..<7, id: \.self) { day in
+                    Button {
+                        store.assignDay(day, to: recipe.id)
+                    } label: {
+                        if store.mealPlan[recipe.id] == day {
+                            Label(dayNames[day], systemImage: "checkmark")
+                        } else {
+                            Text(dayNames[day])
+                        }
+                    }
+                }
+
+                if store.mealPlan[recipe.id] != nil {
+                    Divider()
+                    Button(role: .destructive) {
+                        store.assignDay(nil, to: recipe.id)
+                    } label: {
+                        Label("Unassign", systemImage: "xmark")
+                    }
+                }
+            } label: {
+                HStack(spacing: 4) {
+                    Text(dayLabel)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
+            }
         }
+        .contentShape(Rectangle())
     }
 }
