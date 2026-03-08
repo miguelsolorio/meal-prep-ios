@@ -29,6 +29,7 @@ final class RecipeStore: ObservableObject {
     @Published var isImporting = false
     @Published var importError: String?
     @Published var shareImportError: String?
+    @Published var mealPlan: [Int: [UUID]] = [:]
     @Published var searchText = ""
     @Published var filterOptions = FilterOptions()
 
@@ -40,6 +41,7 @@ final class RecipeStore: ObservableObject {
         loadRecipes()
         loadSelectedIDs()
         loadCustomIngredients()
+        loadMealPlan()
     }
 
     // MARK: - Persistence
@@ -70,6 +72,21 @@ final class RecipeStore: ObservableObject {
     private func saveCustomIngredients() {
         guard let data = try? JSONEncoder().encode(customIngredients) else { return }
         UserDefaults.standard.set(data, forKey: UserDefaultsKeys.customIngredients)
+    }
+
+    private func loadMealPlan() {
+        guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.mealPlan),
+              let decoded = try? JSONDecoder().decode([String: [String]].self, from: data) else { return }
+        mealPlan = Dictionary(uniqueKeysWithValues: decoded.compactMap { key, values in
+            guard let day = Int(key) else { return nil }
+            return (day, values.compactMap(UUID.init))
+        })
+    }
+
+    private func saveMealPlan() {
+        let stringKeyed = Dictionary(uniqueKeysWithValues: mealPlan.map { ($0.key.description, $0.value.map(\.uuidString)) })
+        guard let data = try? JSONEncoder().encode(stringKeyed) else { return }
+        UserDefaults.standard.set(data, forKey: UserDefaultsKeys.mealPlan)
     }
 
     // MARK: - Cookie
@@ -196,6 +213,29 @@ final class RecipeStore: ObservableObject {
         }
 
         isImporting = false
+    }
+
+    // MARK: - Meal Plan
+
+    func recipesForDay(_ day: Int) -> [(index: Int, recipe: Recipe)] {
+        (mealPlan[day] ?? []).enumerated().compactMap { index, id in
+            recipes.first { $0.id == id }.map { (index, $0) }
+        }
+    }
+
+    func addToDay(_ day: Int, recipeID: UUID) {
+        mealPlan[day, default: []].append(recipeID)
+        saveMealPlan()
+    }
+
+    func removeFromDay(_ day: Int, at offsets: IndexSet) {
+        mealPlan[day]?.remove(atOffsets: offsets)
+        saveMealPlan()
+    }
+
+    func moveInDay(_ day: Int, from: IndexSet, to: Int) {
+        mealPlan[day]?.move(fromOffsets: from, toOffset: to)
+        saveMealPlan()
     }
 
     func deleteRecipe(_ recipe: Recipe) {
