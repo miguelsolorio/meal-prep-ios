@@ -1,0 +1,620 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		110F88EDB0232DD08E67F892 /* RecipeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88B3D8041735123E6EA8715 /* RecipeStore.swift */; };
+		1BAC96F393D8A947988B56E8 /* ShoppingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF807432BF62D149A1BE00C2 /* ShoppingListView.swift */; };
+		1E509B1240AEF2A20E39C0D4 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17FC90EEF22AA7CAAB3727F /* ImportView.swift */; };
+		1F0EB7E18DCD31E2B212E2C2 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6DE5A663632B5B9CA2736 /* UserDefaultsKeys.swift */; };
+		25CE4E2E1F0142AEBF8C3AE7 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1196E7DB6A0112E22D336BDB /* RecipeDetailView.swift */; };
+		2CA3E58463E3AFD73572AF75 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE42581385481645A0CECD82 /* ShareViewController.swift */; };
+		2DEAADFE57EE8D7FCE3A2F36 /* RecipeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B50BEC26ED42D94C860153 /* RecipeFilter.swift */; };
+		2FA366A0492D40E3DE5ADAA5 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BAF9A7C93DA2F385D57413 /* LibraryView.swift */; };
+		4006D160A8D80BCBDA04AFA3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F03BC52DF7A2D432F0A8C /* SettingsView.swift */; };
+		50C75388D67620D039884326 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACD5407ED8C4A11776EEDD /* Recipe.swift */; };
+		541D3A15184EE2847C8B0689 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4223D0FC045DD71C670A8 /* ContentView.swift */; };
+		5C86A5CF32CF92A07E4C7459 /* ManageRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC98DA7C17D841F869F95E6A /* ManageRecipesView.swift */; };
+		7379E8A3EEBFE8DFC19EF06D /* FilterSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC5CEFF3C02B2A5086268DE /* FilterSortView.swift */; };
+		86ED6C6B230709800BDC190E /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C88DF5CD78599A290B2C8 /* HTMLParser.swift */; };
+		8F8C75A8C72717CD5C18D2B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 708974BBE0EAF2856A5EA810 /* Assets.xcassets */; };
+		A35C54D69E2AA6547C0C2618 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0710BDB935FA818DA971F /* EmptyStateView.swift */; };
+		A40E2768E24360F8FBB2918A /* RecipeScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BD3393FE999F709367CCD5 /* RecipeScraper.swift */; };
+		A4379245EEEC6F6167BD1F50 /* ShoppingListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA510355C95DE7274A54384 /* ShoppingListRowView.swift */; };
+		ABC770E5233EEBAAC96D73FB /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93DE4F5A0EE13C7908D87E2 /* CheckboxToggleStyle.swift */; };
+		AE6A2122A2E0A34AD9FC7740 /* MealPrepShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B3E590965CC29C6EC93F0F73 /* RecipeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C42883263FE296A5E4463 /* RecipeImageView.swift */; };
+		C3A1234AF76520167AC95E99 /* ISO8601DurationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3032050069F9B406A85FA6E3 /* ISO8601DurationParser.swift */; };
+		C844C85B276312FFC5E711C4 /* MealPrepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665D5A70B57F4696B67574D2 /* MealPrepApp.swift */; };
+		DC01609A481C40F6F5B357B7 /* RecipeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5583EB33F4F7FBFBBE11A794 /* RecipeListItemView.swift */; };
+		E5E5D15B6ED5E808D0BC8C07 /* GroceryDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB95BA5540C53A4B87B6F7 /* GroceryDepartment.swift */; };
+		EBEC6686BAD78BF8DA239109 /* RecipeGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5974EA3C83FAA3B425F8A00 /* RecipeGridItemView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		027971380BA3FE9CF436A1EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7363F4F42C57FCBEB844A8F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E75E0177EF4412EAFDE3E883;
+			remoteInfo = MealPrepShareExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0A06D09E1E927F31AD81941B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AE6A2122A2E0A34AD9FC7740 /* MealPrepShareExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		011C42883263FE296A5E4463 /* RecipeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageView.swift; sourceTree = "<group>"; };
+		0A7C88DF5CD78599A290B2C8 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		0D0DFA1E36755760F669728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1196E7DB6A0112E22D336BDB /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		21B50BEC26ED42D94C860153 /* RecipeFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFilter.swift; sourceTree = "<group>"; };
+		23BD3393FE999F709367CCD5 /* RecipeScraper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScraper.swift; sourceTree = "<group>"; };
+		3032050069F9B406A85FA6E3 /* ISO8601DurationParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DurationParser.swift; sourceTree = "<group>"; };
+		32BAF9A7C93DA2F385D57413 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		35CB858A6813742CFBB5402C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3AEB95BA5540C53A4B87B6F7 /* GroceryDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryDepartment.swift; sourceTree = "<group>"; };
+		5583EB33F4F7FBFBBE11A794 /* RecipeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemView.swift; sourceTree = "<group>"; };
+		5CC5CEFF3C02B2A5086268DE /* FilterSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortView.swift; sourceTree = "<group>"; };
+		65CB1A738E45EF99B61772C9 /* MealPrepShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MealPrepShareExtension.entitlements; sourceTree = "<group>"; };
+		665D5A70B57F4696B67574D2 /* MealPrepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPrepApp.swift; sourceTree = "<group>"; };
+		708974BBE0EAF2856A5EA810 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		73A4223D0FC045DD71C670A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7B6F03BC52DF7A2D432F0A8C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		90A6DE5A663632B5B9CA2736 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		92206E3F3E7C68A3F35CD085 /* MealPrep.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MealPrep.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A17FC90EEF22AA7CAAB3727F /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
+		A7ACD5407ED8C4A11776EEDD /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		A93DE4F5A0EE13C7908D87E2 /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
+		B6D0710BDB935FA818DA971F /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		BC98DA7C17D841F869F95E6A /* ManageRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRecipesView.swift; sourceTree = "<group>"; };
+		CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MealPrepShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF807432BF62D149A1BE00C2 /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
+		DAA510355C95DE7274A54384 /* ShoppingListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListRowView.swift; sourceTree = "<group>"; };
+		E5974EA3C83FAA3B425F8A00 /* RecipeGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeGridItemView.swift; sourceTree = "<group>"; };
+		E88B3D8041735123E6EA8715 /* RecipeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStore.swift; sourceTree = "<group>"; };
+		EE42581385481645A0CECD82 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		F1DF922016D2207F1541DEC1 /* MealPrep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MealPrep.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1B46A64A5386ABE500325884 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92206E3F3E7C68A3F35CD085 /* MealPrep.app */,
+				CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1D5236E29E064027C79EE652 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7B6F03BC52DF7A2D432F0A8C /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		36D2F078860F5C59EEAB640F /* MealPrep */ = {
+			isa = PBXGroup;
+			children = (
+				708974BBE0EAF2856A5EA810 /* Assets.xcassets */,
+				0D0DFA1E36755760F669728F /* Info.plist */,
+				F1DF922016D2207F1541DEC1 /* MealPrep.entitlements */,
+				9CE75DA79BF20159B58AB740 /* App */,
+				ACB9BB89887AED3FA8E417D0 /* Models */,
+				D9BB9D48133C147A94F7A0AE /* Networking */,
+				BBA39D77241EFB1E029F0230 /* Store */,
+				DFD9EA03FACC71BD400FBB2A /* Utilities */,
+				D72F1C760AAED00A9A6839AF /* Views */,
+			);
+			path = MealPrep;
+			sourceTree = "<group>";
+		};
+		85BC2482481B2919C84E255F /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				A17FC90EEF22AA7CAAB3727F /* ImportView.swift */,
+			);
+			path = Import;
+			sourceTree = "<group>";
+		};
+		9CE75DA79BF20159B58AB740 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				73A4223D0FC045DD71C670A8 /* ContentView.swift */,
+				665D5A70B57F4696B67574D2 /* MealPrepApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA906039780D6FAFCC1AB0BF /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				BC98DA7C17D841F869F95E6A /* ManageRecipesView.swift */,
+				DAA510355C95DE7274A54384 /* ShoppingListRowView.swift */,
+				CF807432BF62D149A1BE00C2 /* ShoppingListView.swift */,
+			);
+			path = ShoppingList;
+			sourceTree = "<group>";
+		};
+		ACB9BB89887AED3FA8E417D0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3AEB95BA5540C53A4B87B6F7 /* GroceryDepartment.swift */,
+				A7ACD5407ED8C4A11776EEDD /* Recipe.swift */,
+				21B50BEC26ED42D94C860153 /* RecipeFilter.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B81D26C6043A75951457629B = {
+			isa = PBXGroup;
+			children = (
+				36D2F078860F5C59EEAB640F /* MealPrep */,
+				C439A854033CDF5C95118E13 /* MealPrepShareExtension */,
+				1B46A64A5386ABE500325884 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BBA39D77241EFB1E029F0230 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				E88B3D8041735123E6EA8715 /* RecipeStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		C439A854033CDF5C95118E13 /* MealPrepShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				35CB858A6813742CFBB5402C /* Info.plist */,
+				65CB1A738E45EF99B61772C9 /* MealPrepShareExtension.entitlements */,
+				EE42581385481645A0CECD82 /* ShareViewController.swift */,
+			);
+			path = MealPrepShareExtension;
+			sourceTree = "<group>";
+		};
+		CF3726457BBFBECC2C75AB62 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A93DE4F5A0EE13C7908D87E2 /* CheckboxToggleStyle.swift */,
+				B6D0710BDB935FA818DA971F /* EmptyStateView.swift */,
+				5CC5CEFF3C02B2A5086268DE /* FilterSortView.swift */,
+				011C42883263FE296A5E4463 /* RecipeImageView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D72F1C760AAED00A9A6839AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF3726457BBFBECC2C75AB62 /* Components */,
+				85BC2482481B2919C84E255F /* Import */,
+				FABF8D4F4DD89306B08534B0 /* Library */,
+				1D5236E29E064027C79EE652 /* Settings */,
+				AA906039780D6FAFCC1AB0BF /* ShoppingList */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D9BB9D48133C147A94F7A0AE /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0A7C88DF5CD78599A290B2C8 /* HTMLParser.swift */,
+				23BD3393FE999F709367CCD5 /* RecipeScraper.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		DFD9EA03FACC71BD400FBB2A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3032050069F9B406A85FA6E3 /* ISO8601DurationParser.swift */,
+				90A6DE5A663632B5B9CA2736 /* UserDefaultsKeys.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FABF8D4F4DD89306B08534B0 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				32BAF9A7C93DA2F385D57413 /* LibraryView.swift */,
+				1196E7DB6A0112E22D336BDB /* RecipeDetailView.swift */,
+				E5974EA3C83FAA3B425F8A00 /* RecipeGridItemView.swift */,
+				5583EB33F4F7FBFBBE11A794 /* RecipeListItemView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3164044ADD05C7FAF0C95FCF /* MealPrep */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8B25C318E6705078795FCCD /* Build configuration list for PBXNativeTarget "MealPrep" */;
+			buildPhases = (
+				4ACA4D42B00E374050606DD3 /* Sources */,
+				38C84EB5E36CAC0D1BA4AF1A /* Resources */,
+				0A06D09E1E927F31AD81941B /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C6702191F5C9EAAF03EAA817 /* PBXTargetDependency */,
+			);
+			name = MealPrep;
+			packageProductDependencies = (
+			);
+			productName = MealPrep;
+			productReference = 92206E3F3E7C68A3F35CD085 /* MealPrep.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E75E0177EF4412EAFDE3E883 /* MealPrepShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E826AF2D5E80209C2A624530 /* Build configuration list for PBXNativeTarget "MealPrepShareExtension" */;
+			buildPhases = (
+				33EF905B1E6FD59A43C6A432 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MealPrepShareExtension;
+			packageProductDependencies = (
+			);
+			productName = MealPrepShareExtension;
+			productReference = CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7363F4F42C57FCBEB844A8F7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					3164044ADD05C7FAF0C95FCF = {
+						DevelopmentTeam = "";
+					};
+					E75E0177EF4412EAFDE3E883 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 5B282779A89D32EC0F5502FA /* Build configuration list for PBXProject "MealPrep" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B81D26C6043A75951457629B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1B46A64A5386ABE500325884 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3164044ADD05C7FAF0C95FCF /* MealPrep */,
+				E75E0177EF4412EAFDE3E883 /* MealPrepShareExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38C84EB5E36CAC0D1BA4AF1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F8C75A8C72717CD5C18D2B4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		33EF905B1E6FD59A43C6A432 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CA3E58463E3AFD73572AF75 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ACA4D42B00E374050606DD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC770E5233EEBAAC96D73FB /* CheckboxToggleStyle.swift in Sources */,
+				541D3A15184EE2847C8B0689 /* ContentView.swift in Sources */,
+				A35C54D69E2AA6547C0C2618 /* EmptyStateView.swift in Sources */,
+				7379E8A3EEBFE8DFC19EF06D /* FilterSortView.swift in Sources */,
+				E5E5D15B6ED5E808D0BC8C07 /* GroceryDepartment.swift in Sources */,
+				86ED6C6B230709800BDC190E /* HTMLParser.swift in Sources */,
+				C3A1234AF76520167AC95E99 /* ISO8601DurationParser.swift in Sources */,
+				1E509B1240AEF2A20E39C0D4 /* ImportView.swift in Sources */,
+				2FA366A0492D40E3DE5ADAA5 /* LibraryView.swift in Sources */,
+				5C86A5CF32CF92A07E4C7459 /* ManageRecipesView.swift in Sources */,
+				C844C85B276312FFC5E711C4 /* MealPrepApp.swift in Sources */,
+				50C75388D67620D039884326 /* Recipe.swift in Sources */,
+				25CE4E2E1F0142AEBF8C3AE7 /* RecipeDetailView.swift in Sources */,
+				2DEAADFE57EE8D7FCE3A2F36 /* RecipeFilter.swift in Sources */,
+				EBEC6686BAD78BF8DA239109 /* RecipeGridItemView.swift in Sources */,
+				B3E590965CC29C6EC93F0F73 /* RecipeImageView.swift in Sources */,
+				DC01609A481C40F6F5B357B7 /* RecipeListItemView.swift in Sources */,
+				A40E2768E24360F8FBB2918A /* RecipeScraper.swift in Sources */,
+				110F88EDB0232DD08E67F892 /* RecipeStore.swift in Sources */,
+				4006D160A8D80BCBDA04AFA3 /* SettingsView.swift in Sources */,
+				A4379245EEEC6F6167BD1F50 /* ShoppingListRowView.swift in Sources */,
+				1BAC96F393D8A947988B56E8 /* ShoppingListView.swift in Sources */,
+				1F0EB7E18DCD31E2B212E2C2 /* UserDefaultsKeys.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C6702191F5C9EAAF03EAA817 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E75E0177EF4412EAFDE3E883 /* MealPrepShareExtension */;
+			targetProxy = 027971380BA3FE9CF436A1EA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		270C0839FF441B204DDF3A91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MealPrep/MealPrep.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MealPrep/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.miguelsolorio.mealprep;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6C88556A7FE04299821ED3FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MealPrepShareExtension/MealPrepShareExtension.entitlements;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MealPrepShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.miguelsolorio.mealprep.shareextension;
+				PRODUCT_NAME = MealPrepShareExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		73658ED83B98D2C64D40F314 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "Meal Prep";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		B065D7D7D23EEB5E75862D1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Meal Prep";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		BCAA455D3673C2199B1E5F01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MealPrep/MealPrep.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MealPrep/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.miguelsolorio.mealprep;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D34C71CA56667A63E79EEED5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MealPrepShareExtension/MealPrepShareExtension.entitlements;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MealPrepShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.miguelsolorio.mealprep.shareextension;
+				PRODUCT_NAME = MealPrepShareExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5B282779A89D32EC0F5502FA /* Build configuration list for PBXProject "MealPrep" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B065D7D7D23EEB5E75862D1E /* Debug */,
+				73658ED83B98D2C64D40F314 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E826AF2D5E80209C2A624530 /* Build configuration list for PBXNativeTarget "MealPrepShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D34C71CA56667A63E79EEED5 /* Debug */,
+				6C88556A7FE04299821ED3FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F8B25C318E6705078795FCCD /* Build configuration list for PBXNativeTarget "MealPrep" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCAA455D3673C2199B1E5F01 /* Debug */,
+				270C0839FF441B204DDF3A91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7363F4F42C57FCBEB844A8F7 /* Project object */;
+}
