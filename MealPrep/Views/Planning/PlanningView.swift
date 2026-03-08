@@ -19,17 +19,11 @@ struct PlanningView: View {
                 }
             }
             .navigationTitle("Planning")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    EditButton()
-                }
-            }
         }
     }
 
     private var planList: some View {
         List {
-            // Unassigned section — always show if there are unassigned recipes
             let unassigned = store.unassignedPlanRecipes
             if !unassigned.isEmpty {
                 daySection(title: "Unassigned", day: nil, recipes: unassigned)
@@ -39,6 +33,7 @@ struct PlanningView: View {
                 daySection(title: dayNames[day], day: day, recipes: store.recipesForDay(day))
             }
         }
+        .environment(\.editMode, .constant(.active))
     }
 
     @ViewBuilder
@@ -48,15 +43,6 @@ struct PlanningView: View {
                 PlanningRowView(recipe: recipe)
                     .contextMenu {
                         moveToDayMenu(for: recipe.id, currentDay: day)
-                    }
-                    .swipeActions(edge: .trailing) {
-                        if day != nil {
-                            Button(role: .destructive) {
-                                store.moveRecipeToDay(nil, recipeID: recipe.id)
-                            } label: {
-                                Label("Unassign", systemImage: "xmark")
-                            }
-                        }
                     }
             }
             .onMove { from, to in
@@ -68,10 +54,8 @@ struct PlanningView: View {
     @ViewBuilder
     private func moveToDayMenu(for recipeID: UUID, currentDay: Int?) -> some View {
         ForEach(0..<7, id: \.self) { day in
-            if day != currentDay {
-                Button(dayNames[day]) {
-                    store.moveRecipeToDay(day, recipeID: recipeID)
-                }
+            Button(dayNames[day]) {
+                store.moveRecipeToDay(day, recipeID: recipeID)
             }
         }
         if currentDay != nil {
