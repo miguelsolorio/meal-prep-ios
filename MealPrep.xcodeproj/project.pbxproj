@@ -15,6 +15,7 @@
 		2CA3E58463E3AFD73572AF75 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE42581385481645A0CECD82 /* ShareViewController.swift */; };
 		2DEAADFE57EE8D7FCE3A2F36 /* RecipeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B50BEC26ED42D94C860153 /* RecipeFilter.swift */; };
 		2FA366A0492D40E3DE5ADAA5 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BAF9A7C93DA2F385D57413 /* LibraryView.swift */; };
+		3A92983F0B520933B5494092 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECEF5EBAF58F1BA0B2DA9C9 /* ImageCache.swift */; };
 		4006D160A8D80BCBDA04AFA3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F03BC52DF7A2D432F0A8C /* SettingsView.swift */; };
 		50C75388D67620D039884326 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACD5407ED8C4A11776EEDD /* Recipe.swift */; };
 		541D3A15184EE2847C8B0689 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4223D0FC045DD71C670A8 /* ContentView.swift */; };
@@ -96,6 +97,7 @@
 		E5974EA3C83FAA3B425F8A00 /* RecipeGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeGridItemView.swift; sourceTree = "<group>"; };
 		E88B3D8041735123E6EA8715 /* RecipeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStore.swift; sourceTree = "<group>"; };
 		EE42581385481645A0CECD82 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		EECEF5EBAF58F1BA0B2DA9C9 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		F1DF922016D2207F1541DEC1 /* MealPrep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MealPrep.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,6 +253,7 @@
 		DFD9EA03FACC71BD400FBB2A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				EECEF5EBAF58F1BA0B2DA9C9 /* ImageCache.swift */,
 				3032050069F9B406A85FA6E3 /* ISO8601DurationParser.swift */,
 				90A6DE5A663632B5B9CA2736 /* UserDefaultsKeys.swift */,
 			);
@@ -376,6 +379,7 @@
 				E5E5D15B6ED5E808D0BC8C07 /* GroceryDepartment.swift in Sources */,
 				86ED6C6B230709800BDC190E /* HTMLParser.swift in Sources */,
 				C3A1234AF76520167AC95E99 /* ISO8601DurationParser.swift in Sources */,
+				3A92983F0B520933B5494092 /* ImageCache.swift in Sources */,
 				1E509B1240AEF2A20E39C0D4 /* ImportView.swift in Sources */,
 				2FA366A0492D40E3DE5ADAA5 /* LibraryView.swift in Sources */,
 				F73083FFB49E1D5FA1B3F74F /* LoadingView.swift in Sources */,

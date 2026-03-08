@@ -4,30 +4,26 @@ struct RecipeImageView: View {
     let url: URL?
     var cornerRadius: CGFloat = 12
 
+    @State private var loadedImage: UIImage?
+
     var body: some View {
         Group {
-            if let url {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    case .failure:
-                        placeholder
-                    case .empty:
-                        ProgressView()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color(.systemGray6))
-                    @unknown default:
-                        placeholder
-                    }
-                }
+            if let image = loadedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+            } else if url != nil {
+                Color(.systemGray6)
+                    .overlay { ProgressView() }
             } else {
                 placeholder
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .task(id: url) {
+            guard let url else { loadedImage = nil; return }
+            loadedImage = await ImageCache.shared.image(for: url)
+        }
     }
 
     private var placeholder: some View {

@@ -49,6 +49,9 @@ struct LibraryView: View {
                         }
                         .padding()
                     }
+                    .refreshable {
+                        await store.refresh()
+                    }
                 }
             }
             .navigationTitle("Library")

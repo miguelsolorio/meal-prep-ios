@@ -52,6 +52,11 @@ final class RecipeStore: ObservableObject {
         recipes = (try? context.fetch(descriptor)) ?? []
     }
 
+    func refresh() async {
+        await ImageCache.shared.clearMemoryCache()
+        loadRecipes()
+    }
+
     private func loadSelectedIDs() {
         let strings = UserDefaults.standard.stringArray(forKey: UserDefaultsKeys.selectedRecipeIDs) ?? []
         selectedRecipeIDs = Set(strings.compactMap(UUID.init))
