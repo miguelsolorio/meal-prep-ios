@@ -34,6 +34,7 @@
 		E5E5D15B6ED5E808D0BC8C07 /* GroceryDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB95BA5540C53A4B87B6F7 /* GroceryDepartment.swift */; };
 		E776988875BA854F48BFC962 /* PlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBE4A120198A80AEA5E6A5F /* PlanningView.swift */; };
 		EBEC6686BAD78BF8DA239109 /* RecipeGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5974EA3C83FAA3B425F8A00 /* RecipeGridItemView.swift */; };
+		F73083FFB49E1D5FA1B3F74F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633BB48962CBCEEEA36592CB /* LoadingView.swift */; };
 		FA11F7F7A4D1E3307BF7785B /* ManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419439E279C132B128D97962 /* ManageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		5583EB33F4F7FBFBBE11A794 /* RecipeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemView.swift; sourceTree = "<group>"; };
 		5CC5CEFF3C02B2A5086268DE /* FilterSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortView.swift; sourceTree = "<group>"; };
 		5EBE4A120198A80AEA5E6A5F /* PlanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningView.swift; sourceTree = "<group>"; };
+		633BB48962CBCEEEA36592CB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		65CB1A738E45EF99B61772C9 /* MealPrepShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MealPrepShareExtension.entitlements; sourceTree = "<group>"; };
 		665D5A70B57F4696B67574D2 /* MealPrepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPrepApp.swift; sourceTree = "<group>"; };
 		708974BBE0EAF2856A5EA810 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				A93DE4F5A0EE13C7908D87E2 /* CheckboxToggleStyle.swift */,
 				B6D0710BDB935FA818DA971F /* EmptyStateView.swift */,
 				5CC5CEFF3C02B2A5086268DE /* FilterSortView.swift */,
+				633BB48962CBCEEEA36592CB /* LoadingView.swift */,
 				011C42883263FE296A5E4463 /* RecipeImageView.swift */,
 			);
 			path = Components;
@@ -375,6 +378,7 @@
 				C3A1234AF76520167AC95E99 /* ISO8601DurationParser.swift in Sources */,
 				1E509B1240AEF2A20E39C0D4 /* ImportView.swift in Sources */,
 				2FA366A0492D40E3DE5ADAA5 /* LibraryView.swift in Sources */,
+				F73083FFB49E1D5FA1B3F74F /* LoadingView.swift in Sources */,
 				5C86A5CF32CF92A07E4C7459 /* ManageRecipesView.swift in Sources */,
 				FA11F7F7A4D1E3307BF7785B /* ManageView.swift in Sources */,
 				C844C85B276312FFC5E711C4 /* MealPrepApp.swift in Sources */,

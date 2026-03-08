@@ -17,13 +17,28 @@ struct MealPrepApp: App {
         }
     }
 
+    @State private var isLaunching = true
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(store)
-                .onOpenURL { url in
-                    handleIncomingURL(url)
+            ZStack {
+                ContentView()
+                    .environmentObject(store)
+                    .onOpenURL { url in
+                        handleIncomingURL(url)
+                    }
+
+                if isLaunching {
+                    LoadingView()
+                        .transition(.opacity)
+                        .task {
+                            try? await Task.sleep(for: .milliseconds(800))
+                            withAnimation(.easeOut(duration: 0.4)) {
+                                isLaunching = false
+                            }
+                        }
                 }
+            }
         }
         .modelContainer(container)
         .onChange(of: scenePhase) { _, newPhase in
