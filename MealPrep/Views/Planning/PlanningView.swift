@@ -43,10 +43,12 @@ struct PlanningView: View {
 
     @ViewBuilder
     private func daySection(title: String, day: Int?, recipes: [Recipe]) -> some View {
-        Section {
+        Section(title) {
             ForEach(recipes) { recipe in
                 PlanningRowView(recipe: recipe)
-                    .draggable(recipe.id.uuidString)
+                    .contextMenu {
+                        moveToDayMenu(for: recipe.id, currentDay: day)
+                    }
                     .swipeActions(edge: .trailing) {
                         if day != nil {
                             Button(role: .destructive) {
@@ -60,20 +62,23 @@ struct PlanningView: View {
             .onMove { from, to in
                 if let day { store.moveInDay(day, from: from, to: to) }
             }
-        } header: {
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(.primary)
-                .padding(.vertical, 4)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .dropDestination(for: String.self) { items, _ in
-                    for uuidString in items {
-                        guard let id = UUID(uuidString: uuidString) else { continue }
-                        store.moveRecipeToDay(day, recipeID: id)
-                    }
-                    return true
+        }
+    }
+
+    @ViewBuilder
+    private func moveToDayMenu(for recipeID: UUID, currentDay: Int?) -> some View {
+        ForEach(0..<7, id: \.self) { day in
+            if day != currentDay {
+                Button(dayNames[day]) {
+                    store.moveRecipeToDay(day, recipeID: recipeID)
                 }
+            }
+        }
+        if currentDay != nil {
+            Divider()
+            Button("Unassign", role: .destructive) {
+                store.moveRecipeToDay(nil, recipeID: recipeID)
+            }
         }
     }
 }
