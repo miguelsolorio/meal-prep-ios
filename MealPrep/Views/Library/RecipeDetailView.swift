@@ -3,6 +3,8 @@ import SwiftUI
 struct RecipeDetailView: View {
     let recipe: Recipe
     @EnvironmentObject private var store: RecipeStore
+    @Environment(\.dismiss) private var dismiss
+    @State private var showingDeleteConfirmation = false
 
     var body: some View {
         ScrollView {
@@ -97,6 +99,17 @@ struct RecipeDetailView: View {
                             .background(Color(.secondarySystemGroupedBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
+
+                    // Delete recipe
+                    Button(role: .destructive) {
+                        showingDeleteConfirmation = true
+                    } label: {
+                        Label("Delete Recipe", systemImage: "trash")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(.secondarySystemGroupedBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
                 }
                 .padding(.horizontal, 60)
                 .padding(.vertical, 20)
@@ -106,15 +119,37 @@ struct RecipeDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                if !store.isSelected(recipe.id) {
-                    Button {
-                        store.addToShoppingList(recipe.id)
-                    } label: {
-                        Image(systemName: "plus.circle")
-                            .foregroundStyle(Color.accentColor)
+                HStack(spacing: 16) {
+                    if store.isInMealPlan(recipe.id) {
+                        Button {
+                            store.removeFromMealPlan(recipe.id)
+                        } label: {
+                            Image(systemName: "calendar.badge.minus")
+                                .foregroundStyle(.red)
+                        }
+                    }
+                    if !store.isSelected(recipe.id) {
+                        Button {
+                            store.addToShoppingList(recipe.id)
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .foregroundStyle(Color.accentColor)
+                        }
                     }
                 }
             }
+        }
+        .confirmationDialog(
+            "Delete Recipe",
+            isPresented: $showingDeleteConfirmation
+        ) {
+            Button("Delete", role: .destructive) {
+                store.deleteRecipe(recipe)
+                dismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("\"\(recipe.name)\" will be permanently removed from your library.")
         }
     }
 }

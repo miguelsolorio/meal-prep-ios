@@ -88,7 +88,7 @@
 		A93DE4F5A0EE13C7908D87E2 /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		B6D0710BDB935FA818DA971F /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		BC98DA7C17D841F869F95E6A /* ManageRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRecipesView.swift; sourceTree = "<group>"; };
-		CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MealPrepShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEC5BE2229826AE2163A020 /* MealPrepShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MealPrepShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF807432BF62D149A1BE00C2 /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
 		DAA510355C95DE7274A54384 /* ShoppingListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListRowView.swift; sourceTree = "<group>"; };
 		E5974EA3C83FAA3B425F8A00 /* RecipeGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeGridItemView.swift; sourceTree = "<group>"; };
@@ -313,11 +313,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
-				TargetAttributes = {
-					E75E0177EF4412EAFDE3E883 = {
-						DevelopmentTeam = "";
-					};
-				};
 			};
 			buildConfigurationList = 5B282779A89D32EC0F5502FA /* Build configuration list for PBXProject "MealPrep" */;
 			developmentRegion = en;
@@ -426,7 +421,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = MealPrepShareExtension/MealPrepShareExtension.entitlements;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KYAL7ZEFQE;
 				INFOPLIST_FILE = MealPrepShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -588,7 +583,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = MealPrepShareExtension/MealPrepShareExtension.entitlements;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KYAL7ZEFQE;
 				INFOPLIST_FILE = MealPrepShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

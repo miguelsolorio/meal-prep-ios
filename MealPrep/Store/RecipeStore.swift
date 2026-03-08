@@ -270,4 +270,13 @@ final class RecipeStore: ObservableObject {
     func isSelected(_ id: UUID) -> Bool {
         selectedRecipeIDs.contains(id)
     }
+
+    func isInMealPlan(_ id: UUID) -> Bool {
+        mealPlan.values.contains { $0.contains(id) }
+    }
+
+    func removeFromMealPlan(_ id: UUID) {
+        for key in mealPlan.keys { mealPlan[key]?.removeAll { $0 == id } }
+        saveMealPlan()
+    }
 }
