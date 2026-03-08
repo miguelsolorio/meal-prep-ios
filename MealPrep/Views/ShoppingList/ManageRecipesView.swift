@@ -21,8 +21,9 @@ struct ManageRecipesView: View {
                     List {
                         ForEach(selectedRecipes) { recipe in
                             HStack(spacing: 12) {
-                                RecipeImageView(url: recipe.imageURL, cornerRadius: 8)
-                                    .frame(width: 56, height: 56)
+                                RecipeImageView(url: recipe.imageURL, cornerRadius: 6)
+                                    .frame(width: 44, height: 44)
+                                    .clipped()
 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(recipe.name)
