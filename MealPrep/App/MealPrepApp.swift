@@ -39,6 +39,9 @@ struct MealPrepApp: App {
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let recipeURLString = components.queryItems?.first(where: { $0.name == "url" })?.value
         else { return }
+        // Clear pending key so checkPendingImport doesn't double-import
+        UserDefaults(suiteName: UserDefaultsKeys.appGroup)?
+            .removeObject(forKey: UserDefaultsKeys.pendingImportURL)
         Task {
             await store.importRecipe(from: recipeURLString)
         }
