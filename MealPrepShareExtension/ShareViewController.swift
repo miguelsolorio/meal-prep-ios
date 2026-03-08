@@ -121,19 +121,10 @@ final class ShareViewController: UIViewController {
     private func openMainApp(urlString: String) {
         let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         guard let appURL = URL(string: "\(ShareConstants.urlScheme)\(encoded)") else { return }
-
-        var responder: UIResponder? = self
-        while let r = responder {
-            if let app = r as? UIApplication {
-                app.perform(
-                    NSSelectorFromString("openURL:options:completionHandler:"),
-                    with: appURL,
-                    with: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly: false]
-                )
-                return
-            }
-            responder = r.next
-        }
+        // extensionContext?.open is best-effort from a share extension; the
+        // UserDefaults key written above serves as the reliable fallback via
+        // checkPendingImport when the main app next becomes active.
+        extensionContext?.open(appURL, completionHandler: nil)
     }
 
     private func finish() {
