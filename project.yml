@@ -70,8 +70,7 @@ targets:
         CFBundleDisplayName: Meal Prep Import
         NSExtension:
           NSExtensionAttributes:
-            NSExtensionActivationRule:
-              NSExtensionActivationSupportsWebURLWithMaxCount: 1
+            NSExtensionActivationRule: "SUBQUERY(extensionItems, $extensionItem, SUBQUERY($extensionItem.attachments, $attachment, ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO \"public.url\" || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO \"public.plain-text\").@count > 0).@count > 0"
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShareViewController
           NSExtensionPointIdentifier: com.apple.share-services
 
