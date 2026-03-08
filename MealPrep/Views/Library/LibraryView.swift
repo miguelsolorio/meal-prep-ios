@@ -11,9 +11,9 @@ struct LibraryView: View {
 
     private var columns: [GridItem] {
         if sizeClass == .regular {
-            [.init(.flexible(), spacing: 16), .init(.flexible(), spacing: 16)]
+            [.init(.flexible()), .init(.flexible())]
         } else {
-            [.init(.flexible(), spacing: 16), .init(.flexible(), spacing: 16)]
+            [.init(.flexible())]
         }
     }
 
@@ -52,7 +52,6 @@ struct LibraryView: View {
                 }
             }
             .navigationTitle("Library")
-            .navigationBarTitleDisplayMode(.large)
             .searchable(text: $store.searchText, prompt: "Search recipes")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

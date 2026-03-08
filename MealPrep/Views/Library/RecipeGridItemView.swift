@@ -6,60 +6,57 @@ struct RecipeGridItemView: View {
     let onAdd: () -> Void
 
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            // Full-bleed image
+        VStack(alignment: .leading, spacing: 0) {
+            // Thumbnail
             RecipeImageView(url: recipe.imageURL, cornerRadius: 0)
                 .frame(maxWidth: .infinity)
-                .frame(height: 200)
-
-            // Gradient overlay
-            LinearGradient(
-                colors: [.clear, .black.opacity(0.7)],
-                startPoint: .center,
-                endPoint: .bottom
-            )
+                .frame(height: 160)
+                .clipped()
+                .overlay(alignment: .topTrailing) {
+                    if !isSelected {
+                        Button(action: onAdd) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 22))
+                                .foregroundStyle(Color.white)
+                                .background(Circle().fill(Color.black.opacity(0.35)).padding(2))
+                        }
+                        .padding(8)
+                    }
+                }
 
             // Text content
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(recipe.name)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.white)
                     .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                HStack(spacing: 4) {
+                HStack(spacing: 6) {
                     if !recipe.displayDuration.isEmpty {
                         Label(recipe.displayDuration, systemImage: "clock")
                             .font(.caption2)
-                            .foregroundStyle(.white.opacity(0.8))
+                            .foregroundStyle(.secondary)
                     }
                     if !recipe.author.isEmpty && !recipe.displayDuration.isEmpty {
                         Text("·")
                             .font(.caption2)
-                            .foregroundStyle(.white.opacity(0.6))
+                            .foregroundStyle(.tertiary)
                     }
                     if !recipe.author.isEmpty {
                         Text(recipe.author)
                             .font(.caption2)
-                            .foregroundStyle(.white.opacity(0.8))
+                            .foregroundStyle(.secondary)
                             .lineLimit(1)
                     }
                 }
             }
-            .padding(10)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color(.secondarySystemGroupedBackground))
         }
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .shadow(color: .black.opacity(0.12), radius: 6, x: 0, y: 3)
-        .overlay(alignment: .topTrailing) {
-            if !isSelected {
-                Button(action: onAdd) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 24))
-                        .foregroundStyle(.white)
-                        .shadow(color: .black.opacity(0.3), radius: 4)
-                }
-                .padding(8)
-            }
-        }
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
     }
 }
