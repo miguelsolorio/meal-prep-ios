@@ -74,3 +74,16 @@ targets:
               NSExtensionActivationSupportsWebURLWithMaxCount: 1
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShareViewController
           NSExtensionPointIdentifier: com.apple.share-services
+
+schemes:
+  MealPrep:
+    build:
+      targets:
+        MealPrep: all
+        MealPrepShareExtension: [build]
+    run:
+      executable: MealPrep
+    test:
+      targets: []
+    profile:
+      executable: MealPrep
