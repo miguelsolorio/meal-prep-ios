@@ -144,22 +144,26 @@ enum HTMLParser {
             throw ParserError.noRecipeFound
         }
 
-        // Variant 1: root dict with @type == "Recipe"
+        // Collect all LD dicts from root object or root array
+        var candidates: [[String: Any]] = []
         if let dict = json as? [String: Any] {
-            if isRecipeType(dict) {
-                return try JSONSerialization.data(withJSONObject: dict)
+            candidates.append(dict)
+            if let graph = dict["@graph"] as? [[String: Any]] {
+                candidates.append(contentsOf: graph)
             }
-            // Variant 2: root dict with @graph array
-            if let graph = dict["@graph"] as? [[String: Any]],
-               let recipe = graph.first(where: { isRecipeType($0) }) {
-                return try JSONSerialization.data(withJSONObject: recipe)
-            }
+        } else if let array = json as? [[String: Any]] {
+            candidates = array
         }
 
-        // Variant 3: root array
-        if let array = json as? [[String: Any]],
-           let recipe = array.first(where: { isRecipeType($0) }) {
+        // Prefer @type == "Recipe"
+        if let recipe = candidates.first(where: { isRecipeType($0) }) {
             return try JSONSerialization.data(withJSONObject: recipe)
+        }
+
+        // Fallback: @type == "Article" with articleBody containing INGREDIENTS/DIRECTIONS
+        if let article = candidates.first(where: { isArticleType($0) }),
+           let synthetic = try? extractFromArticle(article) {
+            return synthetic
         }
 
         throw ParserError.noRecipeFound
@@ -170,5 +174,122 @@ enum HTMLParser {
         if let str = type_ as? String { return str == "Recipe" }
         if let arr = type_ as? [String] { return arr.contains("Recipe") }
         return false
+    }
+
+    private static func isArticleType(_ dict: [String: Any]) -> Bool {
+        guard let type_ = dict["@type"] else { return false }
+        let articleTypes = ["Article", "NewsArticle", "BlogPosting"]
+        if let str = type_ as? String { return articleTypes.contains(str) }
+        if let arr = type_ as? [String] { return arr.contains(where: { articleTypes.contains($0) }) }
+        return false
+    }
+
+    /// Synthesise a Recipe-compatible dict from an Article LD block whose
+    /// `articleBody` contains INGREDIENTS / DIRECTIONS sections.
+    private static func extractFromArticle(_ dict: [String: Any]) throws -> Data {
+        guard let body = dict["articleBody"] as? String,
+              let headline = dict["headline"] as? String else {
+            throw ParserError.noRecipeFound
+        }
+
+        let (ingredients, instructions) = parseArticleBody(body)
+        guard !ingredients.isEmpty || !instructions.isEmpty else {
+            throw ParserError.noRecipeFound
+        }
+
+        var recipe: [String: Any] = ["@type": "Recipe", "name": headline]
+        if let image = dict["image"] { recipe["image"] = image }
+        if let author = dict["author"] { recipe["author"] = author }
+        if !ingredients.isEmpty { recipe["recipeIngredient"] = ingredients }
+        if !instructions.isEmpty {
+            recipe["recipeInstructions"] = instructions.map { ["text": $0] }
+        }
+        return try JSONSerialization.data(withJSONObject: recipe)
+    }
+
+    private static func parseArticleBody(_ body: String) -> ([String], [String]) {
+        let upper = body.uppercased()
+        guard let ingRange = upper.range(of: "INGREDIENTS"),
+              let dirRange = upper.range(of: "DIRECTIONS"),
+              ingRange.upperBound < dirRange.lowerBound else {
+            return ([], [])
+        }
+
+        let ingredientsText = String(body[ingRange.upperBound..<dirRange.lowerBound])
+        let instructionsText = String(body[dirRange.upperBound...])
+
+        return (splitIngredients(ingredientsText), splitInstructions(instructionsText))
+    }
+
+    /// Split a run-together ingredient string into individual lines.
+    /// Splits before digit/fraction characters and at lower→upper camelCase boundaries.
+    private static func splitIngredients(_ text: String) -> [String] {
+        // Insert a delimiter before quantity starters and before camelCase transitions
+        let fractions = "½¼¾⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞"
+        var result: [String] = []
+        var current = ""
+
+        let chars = Array(text)
+        for i in chars.indices {
+            let c = chars[i]
+            let prev = i > 0 ? chars[i - 1] : nil
+
+            let startsIngredient: Bool = {
+                // Digit or fraction at a word boundary
+                if c.isNumber || fractions.contains(c) {
+                    return prev == nil || !prev!.isNumber
+                }
+                // camelCase boundary: prev is lowercase, current is uppercase
+                if let p = prev, p.isLowercase, c.isUppercase { return true }
+                return false
+            }()
+
+            if startsIngredient && !current.trimmingCharacters(in: .whitespaces).isEmpty {
+                result.append(current.trimmingCharacters(in: .whitespaces))
+                current = String(c)
+            } else {
+                current.append(c)
+            }
+        }
+        if !current.trimmingCharacters(in: .whitespaces).isEmpty {
+            result.append(current.trimmingCharacters(in: .whitespaces))
+        }
+        return result.filter { !$0.isEmpty }
+    }
+
+    /// Split a run-together instruction string into individual steps.
+    /// Splits on ". CapitalLetter" boundaries and on temperature-unit boundaries (e.g. °FWord).
+    private static func splitInstructions(_ text: String) -> [String] {
+        var result: [String] = []
+        var current = ""
+
+        let chars = Array(text)
+        for i in chars.indices {
+            let c = chars[i]
+            let prev = i > 0 ? chars[i - 1] : nil
+
+            let startsStep: Bool = {
+                guard c.isUppercase, let p = prev else { return false }
+                // After sentence-ending punctuation
+                if ".!?".contains(p) { return true }
+                // After a temperature unit (e.g. °F → next word)
+                if p.isUppercase,
+                   i >= 2,
+                   chars[i - 2] == "°" { return true }
+                return false
+            }()
+
+            if startsStep && !current.trimmingCharacters(in: .whitespaces).isEmpty {
+                result.append(current.trimmingCharacters(in: .whitespaces))
+                current = String(c)
+            } else {
+                current.append(c)
+            }
+        }
+        if !current.trimmingCharacters(in: .whitespaces).isEmpty {
+            result.append(current.trimmingCharacters(in: .whitespaces))
+        }
+        // Drop trailing noise like "Shop …" product links
+        return result.filter { $0.count > 10 }
     }
 }
