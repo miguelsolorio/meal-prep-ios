@@ -10,11 +10,6 @@ struct ContentView: View {
                     Label("Library", systemImage: "books.vertical")
                 }
 
-            ManageView()
-                .tabItem {
-                    Label("Manage", systemImage: "checklist")
-                }
-
             PlanningView()
                 .tabItem {
                     Label("Planning", systemImage: "calendar")
@@ -23,6 +18,11 @@ struct ContentView: View {
             ShoppingListView()
                 .tabItem {
                     Label("Shopping List", systemImage: "cart")
+                }
+
+            ManageView()
+                .tabItem {
+                    Label("Manage", systemImage: "wrench.and.screwdriver")
                 }
         }
         .alert("Couldn't Import Recipe", isPresented: .init(
