@@ -42,17 +42,23 @@ struct MealPrepApp: App {
         // Clear pending key so checkPendingImport doesn't double-import
         UserDefaults(suiteName: UserDefaultsKeys.appGroup)?
             .removeObject(forKey: UserDefaultsKeys.pendingImportURL)
-        Task {
-            await store.importRecipe(from: recipeURLString)
-        }
+        importInBackground(from: recipeURLString)
     }
 
     private func checkPendingImport() {
         let defaults = UserDefaults(suiteName: UserDefaultsKeys.appGroup)
         guard let urlString = defaults?.string(forKey: UserDefaultsKeys.pendingImportURL) else { return }
         defaults?.removeObject(forKey: UserDefaultsKeys.pendingImportURL)
+        importInBackground(from: urlString)
+    }
+
+    private func importInBackground(from urlString: String) {
         Task {
             await store.importRecipe(from: urlString)
+            if let error = store.importError {
+                store.shareImportError = error
+                store.importError = nil
+            }
         }
     }
 }

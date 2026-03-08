@@ -28,6 +28,7 @@ final class RecipeStore: ObservableObject {
     @Published var customIngredients: [CustomIngredient] = []
     @Published var isImporting = false
     @Published var importError: String?
+    @Published var shareImportError: String?
     @Published var searchText = ""
     @Published var filterOptions = FilterOptions()
 
